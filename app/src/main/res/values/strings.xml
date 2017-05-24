@@ -24,4 +24,7 @@
     <string name="title_internal_storage_type">Internal Storage</string>
     <string name="send_to">Send To</string>
     <string name="action_choose_font">Font</string>
+    <string name="Strong_key">storage_key</string>
+    <string name="storage_key">key_storage</string>
+    <string name="storage_default_value">INTERNAL</string>
 </resources>

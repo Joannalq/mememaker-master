@@ -60,7 +60,8 @@ public class FileUtilities {
     }
 
     public static File getFileDirection(Context context){
-        String storType=StorageType.INTERNAL;
+        MemeMakerApplicationSettings settings=new MemeMakerApplicationSettings(context);
+        String storType=settings.getSharedPreferences();
         if(storType.equals(StorageType.INTERNAL)){
             return context.getFilesDir();
         }else {
