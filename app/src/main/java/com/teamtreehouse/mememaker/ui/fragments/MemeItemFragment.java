@@ -84,6 +84,12 @@ public class MemeItemFragment extends ListFragment {
     }
 
     @Override
+    public void onResume() {
+        super.onResume();
+        MemeDataSource dataSource=new MemeDataSource(this.getActivity());
+    }
+
+    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         this.setHasOptionsMenu(true);
 
