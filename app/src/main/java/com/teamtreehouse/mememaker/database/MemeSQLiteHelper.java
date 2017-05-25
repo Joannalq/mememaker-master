@@ -15,10 +15,10 @@ public class MemeSQLiteHelper extends SQLiteOpenHelper{
     public static final String COLUMN_MEME_NAME="names";
 
     private static String CREATE_MEMES=
-            "CREATE TABLE"+MEMES_TAB+"("+BaseColumns._ID
-                    + "INTEGER PRIMARY KEY AUTOINCREAMENT,"
-                    +COLUMN_MEME_ASSET+"TEXT,"+
-                    COLUMN_MEME_NAME+"TEXT)";
+            "CREATE TABLE " + MEMES_TAB + "("
+                    + BaseColumns._ID + " INTEGER PRIMARY KEY AUTOINCREMENT," +
+                    COLUMN_MEME_ASSET +" TEXT," +
+                    COLUMN_MEME_NAME + " TEXT)";
 
 
     public static final String ANNOTATIONS_TABLE = "ANNOTATIONS";
@@ -44,6 +44,7 @@ public class MemeSQLiteHelper extends SQLiteOpenHelper{
     @Override
     public void onCreate(SQLiteDatabase sqLiteDatabase) {
         sqLiteDatabase.execSQL(CREATE_MEMES);
+        sqLiteDatabase.execSQL(CREATE_ANNOTATIONS);
     }
 
     @Override
