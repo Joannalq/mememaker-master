@@ -36,7 +36,7 @@ public class MemeItemFragment extends ListFragment {
 
     private Menu mMenu;
     private int mSelectedItem;
-    private MemeItemListAdapter mMemeItemListAdapter;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -75,10 +75,12 @@ public class MemeItemFragment extends ListFragment {
                                         dataSource.delete(memeId);
                                         refreshMemes();
 
-                                        mMemeItemListAdapter.notifyDataSetChanged();
+                                        /*mMemeItemListAdapter.notifyDataSetChanged();
+                                        mMenu.findItem(R.id.share_action).setVisible(true);
+                                        mMenu.findItem(R.id.edit_action).setVisible(true);*/
+
                                         mMenu.findItem(R.id.share_action).setVisible(true);
                                         mMenu.findItem(R.id.edit_action).setVisible(true);
-
                                     }
                                 });
 
@@ -159,9 +161,6 @@ public class MemeItemFragment extends ListFragment {
 
             canvas.drawText(text, x, y, paint);
         }
-
         return workingBitmap;
     }
-
-
 }

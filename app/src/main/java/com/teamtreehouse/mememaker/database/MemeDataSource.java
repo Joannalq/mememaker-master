@@ -10,6 +10,7 @@ import com.teamtreehouse.mememaker.models.Meme;
 import com.teamtreehouse.mememaker.models.MemeAnnotation;
 
 import java.util.ArrayList;
+import java.util.Date;
 
 public class MemeDataSource {
 
@@ -67,7 +68,8 @@ public class MemeDataSource {
                 null,//selection args
                 null,//group by
                 null,//having
-                null//order
+                MemeSQLiteHelper.COLUMN_MEME_CREATE_DATE//order
+                +" DESC"
         );
         ArrayList<Meme> memes=new ArrayList<Meme>();
         if(cursor.moveToFirst()){
@@ -89,15 +91,15 @@ public class MemeDataSource {
         for(Meme meme:memes){
             ArrayList<MemeAnnotation> annotations=new ArrayList<MemeAnnotation>();
             Cursor cursor=database.rawQuery(
-                    "SELECT * FROM"+MemeSQLiteHelper.ANNOTATIONS_TABLE+
+                    "SELECT * FROM "+MemeSQLiteHelper.ANNOTATIONS_TABLE+
                             " WHERE MEME_ID="+meme.getId(),null
             );
 
             if(cursor.moveToFirst()){
                 do{
                    MemeAnnotation annotation=new MemeAnnotation(getIntColumName(cursor,BaseColumns._ID),
-                            getStringColumName(cursor,MemeSQLiteHelper.COLUMN_MEME_NAME),
-                            getStringColumName(cursor,MemeSQLiteHelper.COLUMN_MEME_ASSET),
+                            getStringColumName(cursor,MemeSQLiteHelper.COLUMN_ANNOTATION_COLOR),
+                            getStringColumName(cursor,MemeSQLiteHelper.COLUMN_ANNOTATION_TITLE),
                             getIntColumName(cursor, MemeSQLiteHelper.COLUMN_ANNOTATION_X),
                            getIntColumName(cursor, MemeSQLiteHelper.COLUMN_ANNOTATION_Y));
                    annotations.add(annotation);
@@ -161,6 +163,7 @@ public class MemeDataSource {
         ContentValues memeValues=new ContentValues();
         memeValues.put(MemeSQLiteHelper.COLUMN_MEME_NAME,meme.getName());
         memeValues.put(MemeSQLiteHelper.COLUMN_MEME_ASSET,meme.getAssetLocation());
+        memeValues.put(MemeSQLiteHelper.COLUMN_MEME_CREATE_DATE,new Date().getTime());
         long memeID=database.insert(MemeSQLiteHelper.MEMES_TAB,null,memeValues);
 
         for(MemeAnnotation annotation:meme.getAnnotations()){
